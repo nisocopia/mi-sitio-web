@@ -53,7 +53,11 @@
                     <!-- Contact Form -->
                     <div class="contact-form">
                         <h2>Envíanos un mensaje</h2>
-                        <form id="contactForm">
+                        <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html">
+                            <input type="hidden" name="form-name" value="contact" />
+                            <div style="display: none;">
+                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                            </div>
                             <div class="form-group">
                                 <label for="name">Nombre completo</label>
                                 <input type="text" id="name" name="name" required>
@@ -225,35 +229,13 @@
     <script>
         // Contact form handling
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Simple validation
-            if (!data.name || !data.email || !data.subject || !data.message) {
-                alert('Por favor completa todos los campos requeridos.');
-                return;
-            }
-            
-            if (!data.privacy) {
-                alert('Debes aceptar la política de privacidad.');
-                return;
-            }
-            
-            // Simulate form submission
+            // Permitir envío normal del formulario (Netlify lo maneja)
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Enviando...';
             submitBtn.disabled = true;
             
-            setTimeout(() => {
-                alert('¡Mensaje enviado exitosamente! Te contactaremos pronto.');
-                this.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
+            // Netlify procesará el formulario automáticamente
         });
 
         // FAQ toggle functionality
