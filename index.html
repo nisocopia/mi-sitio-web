@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Sitio Web Básico</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="#home">MiSitio</a>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">Acerca de</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                <div class="nav-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <h1 class="hero-title">Bienvenido a Mi Sitio Web</h1>
+                <p class="hero-description">
+                    Creamos experiencias digitales increíbles con diseño moderno y funcionalidad excepcional.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary">Ver Servicios</a>
+                    <a href="contact.html" class="btn btn-secondary">Contactanos</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Nuestros Servicios</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🌐</div>
+                        <h3>Desarrollo Web</h3>
+                        <p>Creamos sitios web modernos y responsivos que se adaptan a todos los dispositivos.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>Diseño UI/UX</h3>
+                        <p>Diseñamos interfaces intuitivas y atractivas para mejorar la experiencia del usuario.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3>Optimización</h3>
+                        <p>Optimizamos el rendimiento de tu sitio web para cargas más rápidas y mejor SEO.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Sobre Nosotros</h2>
+                        <p>
+                            Somos un equipo apasionado de desarrolladores y diseñadores dedicados a crear 
+                            soluciones digitales innovadoras. Con años de experiencia en el desarrollo web, 
+                            nos especializamos en crear sitios web que no solo se ven increíbles, sino que 
+                            también funcionan de manera excepcional.
+                        </p>
+                        <p>
+                            Nuestro enfoque se centra en la experiencia del usuario, el diseño responsivo 
+                            y las mejores prácticas de desarrollo para asegurar que tu sitio web destaque 
+                            en el mundo digital.
+                        </p>
+                        <a href="about.html" class="btn btn-primary">Conoce más</a>
+                    </div>
+                    <div class="about-image">
+                        <div class="image-placeholder">
+                            <span>📊</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MiSitio</h3>
+                    <p>Creando experiencias digitales excepcionales desde 2025.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="#home">Inicio</a></li>
+                        <li><a href="about.html">Acerca de</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Email: info@misitio.com</p>
+                    <p>Teléfono: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiSitio. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
