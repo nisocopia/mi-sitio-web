@@ -19,7 +19,7 @@ Un sitio web moderno y responsivo creado con HTML, CSS y JavaScript puro.
 
 ## 🚀 Ver sitio en vivo
 
-Visita: [https://tuusuario.github.io/mi-sitio-web](https://tuusuario.github.io/mi-sitio-web)
+Visita: [https://nisocopia.github.io/mi-sitio-web](https://nisocopia.github.io/mi-sitio-web)
 
 ## 💻 Tecnologías utilizadas
 
