@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flores Amarillas - 21 de Septiembre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg1: #fff8e1;
+      --bg2: #fff1b8;
+      --petal: #ffd54f;
+      --petal-2: #ffca28;
+      --center: #ffb300;
+      --leaf: #7cb342;
+      --stem: #558b2f;
+      --accent: #f59e0b;
+      --text: #1f2937;
+      --shadow: rgba(0,0,0,.12);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x: hidden;
+    }
+
+    /* Floating petals background */
+    .petals-layer { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+    .petal {
+      position: absolute;
+      width: 18px; height: 24px;
+      background: radial-gradient(circle at 30% 30%, #fff 0 20%, var(--petal) 21% 100%);
+      border-radius: 60% 60% 40% 40%/70% 70% 30% 30%;
+      box-shadow: 0 6px 10px var(--shadow);
+      animation: floatY linear var(--dur) infinite, sway ease-in-out var(--dur) infinite;
+      opacity: .85;
+      transform-origin: center -40px;
+    }
+    .petal.p2 { background: radial-gradient(circle at 30% 30%, #fff 0 18%, var(--petal-2) 19% 100%); }
+
+    @keyframes floatY {
+      from { transform: translate3d(var(--x,0), -10vh, 0) rotate(var(--rot,0deg)); }
+      to   { transform: translate3d(calc(var(--x,0) + 10px), 110vh, 0) rotate(calc(var(--rot,0deg) + 180deg)); }
+    }
+    @keyframes sway {
+      0%,100% { margin-left: -10px; }
+      50% { margin-left: 10px; }
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(255, 255, 255, .7);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+    .nav {
+      max-width: 1100px; margin: 0 auto; padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; letter-spacing: .5px; color: var(--accent); text-decoration: none; }
+    .actions { display: flex; gap: 10px; }
+    .btn { border: 0; padding: 10px 16px; border-radius: 999px; cursor: pointer; font-weight: 600; }
+    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 10px 24px rgba(245,158,11,.35); }
+    .btn-ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+
+    main { position: relative; z-index: 1; }
+
+    .hero {
+      min-height: 88vh; display: grid; place-items: center; text-align: center;
+      padding: 80px 20px 60px;
+    }
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.1; margin: 0 0 14px;
+      color: #a16207;
+      text-shadow: 0 2px 0 #fff4, 0 14px 30px rgba(0,0,0,.08);
+    }
+    .subtitle { max-width: 780px; margin: 0 auto 26px; font-size: clamp(1rem, 2.3vw, 1.2rem); color: #6b7280; }
+
+    .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* Bouquet area */
+    .stage { position: relative; width: min(1100px, 92vw); margin: 30px auto 60px; aspect-ratio: 16/9; }
+    .bouquet {
+      position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%);
+      display: grid; place-items: center;
+      filter: drop-shadow(0 14px 28px var(--shadow));
+    }
+
+    /* Flower using pure CSS (petals + center) */
+    .flower { position: relative; width: 120px; height: 120px; animation: bob 3.5s ease-in-out infinite; }
+    .flower.small { transform: scale(.8); }
+    .flower.tiny { transform: scale(.6); }
+
+    @keyframes bob {
+      0%,100% { transform: translateY(0) scale(var(--scale,1)); }
+      50% { transform: translateY(-8px) scale(var(--scale,1)); }
+    }
+
+    .petal-4, .petal-4::before, .petal-4::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 30%, #fff 0 16%, var(--petal) 17% 100%);
+      border-radius: 60% 60% 40% 40%/70% 70% 30% 30%;
+    }
+    .petal-4 { transform: rotate(0deg) translateY(-36px) scale(1.05, 1.1); transform-origin: 50% 70%; }
+    .petal-4::before { transform: rotate(90deg); }
+    .petal-4::after  { transform: rotate(45deg); }
+
+    .center {
+      position: absolute; width: 56px; height: 56px; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      background: radial-gradient(circle at 38% 38%, #fff6 0 8%, var(--center) 9% 100%);
+      box-shadow: inset 0 4px 8px rgba(0,0,0,.15);
+    }
+
+    /* Stem + leaves */
+    .stem { position: absolute; left: 50%; bottom: -60px; width: 8px; height: 120px; background: var(--stem); transform: translateX(-50%); border-radius: 4px; }
+    .leaf { position: absolute; width: 26px; height: 16px; background: var(--leaf); border-radius: 20px 2px 20px 2px; box-shadow: inset 0 2px 4px rgba(0,0,0,.15); }
+    .leaf.l1 { left: -20px; top: 34px; transform: rotate(-32deg); }
+    .leaf.l2 { right: -20px; top: 64px; transform: rotate(28deg); }
+
+    /* Multiple flowers placement */
+    .f { position: absolute; }
+
+    /* Message strip */
+    .strip {
+      background: linear-gradient(90deg, #fef3c7, #fde68a);
+      border: 2px dashed #f59e0b55; color: #a16207;
+      padding: 14px 18px; text-align: center; font-weight: 600; border-radius: 12px;
+      margin: 0 auto 10px; width: min(900px, 92vw);
+      box-shadow: 0 10px 24px var(--shadow);
+    }
+
+    footer { text-align: center; color: #9ca3af; padding: 24px 12px 40px; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .stage { aspect-ratio: 4/5; }
+      .flower { width: 90px; height: 90px; }
+      .stem { height: 90px; bottom: -40px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- floating petals background -->
+  <div class="petals-layer" id="bg-petals"></div>
+
+  <header>
+    <div class="nav">
+      <a class="brand" href="index.html">MiSitio</a>
+      <div class="actions">
+        <a class="btn btn-ghost" href="about.html">Acerca de</a>
+        <a class="btn btn-ghost" href="contact.html">Contacto</a>
+        <a class="btn btn-primary" href="#flores">Ver Flores</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1 class="title">21 de Septiembre • Flores Amarillas</h1>
+        <p class="subtitle">
+          Para celebrar este día especial, un jardín de flores amarillas hecho con cariño para ti. Que estas flores
+          traigan luz, alegría y buenos deseos a tu vida.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#flores">Quiero mis flores 💛</a>
+          <a class="btn btn-ghost" href="https://illustrious-pastelito-f5978d.netlify.app/" target="_blank" rel="noopener">Ver en Netlify</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="strip">Hecho con amor • Comparte este enlace con alguien especial 🌼</div>
+
+    <section id="flores" class="stage">
+      <div class="bouquet">
+        <!-- Big center flower -->
+        <div class="flower f" style="--scale:1; left: 50%; bottom: 8px;">
+          <div class="petal-4"></div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+
+        <!-- Surrounding flowers (absolute positioned) -->
+        <div class="flower f small" style="left: 25%; bottom: 28px; --scale:.9;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
+        <div class="flower f small" style="left: 75%; bottom: 24px; --scale:.95;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
+        <div class="flower f tiny"  style="left: 12%; bottom: 16px; --scale:.7;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
+        <div class="flower f tiny"  style="left: 88%; bottom: 14px; --scale:.75;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
+        <div class="flower f"       style="left: 8%;  bottom: 12px; --scale:.85;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
+        <div class="flower f"       style="left: 92%; bottom: 10px; --scale:.8;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
+      </div>
+    </section>
+
+    <div class="strip">Consejo: toca la pantalla para soltar más pétalos 🌼</div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 • MiSitio • Con mucho cariño 💛</p>
+  </footer>
+
+  <script>
+    // Floating petals generator
+    const layer = document.getElementById('bg-petals');
+
+    function spawnPetal(x = Math.random() * window.innerWidth) {
+      const p = document.createElement('div');
+      p.className = 'petal' + (Math.random() > .5 ? ' p2' : '');
+      const dur = 8 + Math.random() * 8; // 8-16s
+      p.style.setProperty('--dur', dur + 's');
+      p.style.setProperty('--x', x + 'px');
+      p.style.setProperty('--rot', (Math.random() * 120 - 60) + 'deg');
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.top = '-5vh';
+      layer.appendChild(p);
+      setTimeout(() => p.remove(), dur * 1000 + 500);
+    }
+
+    // Initial burst
+    for (let i = 0; i < 24; i++) setTimeout(() => spawnPetal(), i * 220);
+
+    // Continuous spawn
+    setInterval(() => spawnPetal(), 1000);
+
+    // Tap/click to spawn
+    window.addEventListener('pointerdown', (e) => spawnPetal(e.clientX));
+  </script>
+</body>
+</html>
