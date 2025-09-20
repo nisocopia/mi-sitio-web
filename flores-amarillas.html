@@ -96,24 +96,40 @@
       filter: drop-shadow(0 14px 28px var(--shadow));
     }
 
-    /* Flower using pure CSS (petals + center) */
-    .flower { position: relative; width: 120px; height: 120px; animation: bob 3.5s ease-in-out infinite; }
-    .flower.small { transform: scale(.8); }
-    .flower.tiny { transform: scale(.6); }
+    /* Flower: use CSS variable --scale to avoid transform conflicts */
+    .flower { position: relative; width: 120px; height: 120px; --scale: 1; animation: bob 3.5s ease-in-out infinite; }
+    .flower.small { --scale: .85; }
+    .flower.tiny  { --scale: .7; }
 
     @keyframes bob {
-      0%,100% { transform: translateY(0) scale(var(--scale,1)); }
-      50% { transform: translateY(-8px) scale(var(--scale,1)); }
+      0%,100% { transform: translateY(0) scale(var(--scale)); }
+      50% { transform: translateY(-8px) scale(var(--scale)); }
     }
 
-    .petal-4, .petal-4::before, .petal-4::after {
-      content: ""; position: absolute; inset: 0;
-      background: radial-gradient(circle at 30% 30%, #fff 0 16%, var(--petal) 17% 100%);
-      border-radius: 60% 60% 40% 40%/70% 70% 30% 30%;
+    /* 12-petal design */
+    .petals { position: absolute; inset: 0; }
+    .f-p {
+      position: absolute; left: 50%; top: 50%; width: 56px; height: 84px;
+      transform-origin: 50% 82%;
+      background: radial-gradient(circle at 32% 28%, #fff8 0 10%, var(--petal) 11% 100%);
+      border-radius: 55% 55% 45% 45% / 70% 70% 30% 30%;
+      filter: drop-shadow(0 4px 8px var(--shadow));
     }
-    .petal-4 { transform: rotate(0deg) translateY(-36px) scale(1.05, 1.1); transform-origin: 50% 70%; }
-    .petal-4::before { transform: rotate(90deg); }
-    .petal-4::after  { transform: rotate(45deg); }
+    .f-p:nth-child(odd) { background: radial-gradient(circle at 32% 28%, #fff8 0 10%, var(--petal-2) 11% 100%); }
+
+    /* Arrange 12 petals around center */
+    .f-p:nth-child(1)  { transform: translate(-50%, -65%) rotate(0deg); }
+    .f-p:nth-child(2)  { transform: translate(-50%, -65%) rotate(30deg); }
+    .f-p:nth-child(3)  { transform: translate(-50%, -65%) rotate(60deg); }
+    .f-p:nth-child(4)  { transform: translate(-50%, -65%) rotate(90deg); }
+    .f-p:nth-child(5)  { transform: translate(-50%, -65%) rotate(120deg); }
+    .f-p:nth-child(6)  { transform: translate(-50%, -65%) rotate(150deg); }
+    .f-p:nth-child(7)  { transform: translate(-50%, -65%) rotate(180deg); }
+    .f-p:nth-child(8)  { transform: translate(-50%, -65%) rotate(210deg); }
+    .f-p:nth-child(9)  { transform: translate(-50%, -65%) rotate(240deg); }
+    .f-p:nth-child(10) { transform: translate(-50%, -65%) rotate(270deg); }
+    .f-p:nth-child(11) { transform: translate(-50%, -65%) rotate(300deg); }
+    .f-p:nth-child(12) { transform: translate(-50%, -65%) rotate(330deg); }
 
     .center {
       position: absolute; width: 56px; height: 56px; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -50%);
@@ -127,7 +143,7 @@
     .leaf.l1 { left: -20px; top: 34px; transform: rotate(-32deg); }
     .leaf.l2 { right: -20px; top: 64px; transform: rotate(28deg); }
 
-    /* Multiple flowers placement */
+    /* Each flower wrapper position */
     .f { position: absolute; }
 
     /* Message strip */
@@ -174,35 +190,134 @@
         </p>
         <div class="cta">
           <a class="btn btn-primary" href="#flores">Quiero mis flores 💛</a>
-          <a class="btn btn-ghost" href="https://illustrious-pastelito-f5978d.netlify.app/" target="_blank" rel="noopener">Ver en Netlify</a>
+          <a class="btn btn-ghost" href="https://illustrious-pastelito-f5978d.netlify.app/flores-amarillas.html" target="_blank" rel="noopener">Ver en Netlify</a>
         </div>
       </div>
     </section>
 
-    <div class="strip">Hecho con amor • Comparte este enlace con alguien especial 🌼</div>
+    <div class="strip">Hecho con amor • Consejito: toca la pantalla para soltar más pétalos 🌼</div>
 
     <section id="flores" class="stage">
       <div class="bouquet">
-        <!-- Big center flower -->
+        <!-- Center flower -->
         <div class="flower f" style="--scale:1; left: 50%; bottom: 8px;">
-          <div class="petal-4"></div>
+          <div class="petals">
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
           <div class="center"></div>
           <div class="stem"></div>
           <div class="leaf l1"></div>
           <div class="leaf l2"></div>
         </div>
 
-        <!-- Surrounding flowers (absolute positioned) -->
-        <div class="flower f small" style="left: 25%; bottom: 28px; --scale:.9;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
-        <div class="flower f small" style="left: 75%; bottom: 24px; --scale:.95;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
-        <div class="flower f tiny"  style="left: 12%; bottom: 16px; --scale:.7;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
-        <div class="flower f tiny"  style="left: 88%; bottom: 14px; --scale:.75;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
-        <div class="flower f"       style="left: 8%;  bottom: 12px; --scale:.85;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
-        <div class="flower f"       style="left: 92%; bottom: 10px; --scale:.8;"><div class="petal-4"></div><div class="center"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div></div>
+        <!-- Surrounding flowers -->
+        <div class="flower f small" style="left: 25%; bottom: 28px;">
+          <div class="petals">
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+        <div class="flower f small" style="left: 75%; bottom: 24px;">
+          <div class="petals">
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+        <div class="flower f tiny"  style="left: 12%; bottom: 16px;">
+          <div class="petals">
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+        <div class="flower f tiny"  style="left: 88%; bottom: 14px;">
+          <div class="petals">
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+        <div class="flower f"       style="left: 8%;  bottom: 12px; --scale:.9;">
+          <div class="petals">
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+        <div class="flower f"       style="left: 92%; bottom: 10px; --scale:.85;">
+          <div class="petals">
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+
+        <!-- Extra flowers for a fuller bouquet -->
+        <div class="flower f small" style="left: 37%; bottom: 26px;">
+          <div class="petals"> 
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+        <div class="flower f small" style="left: 63%; bottom: 26px;">
+          <div class="petals"> 
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+        <div class="flower f tiny" style="left: 20%; bottom: 10px;">
+          <div class="petals"> 
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
+        <div class="flower f tiny" style="left: 80%; bottom: 12px;">
+          <div class="petals"> 
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+            <span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span><span class="f-p"></span>
+          </div>
+          <div class="center"></div>
+          <div class="stem"></div>
+          <div class="leaf l1"></div>
+          <div class="leaf l2"></div>
+        </div>
       </div>
     </section>
 
-    <div class="strip">Consejo: toca la pantalla para soltar más pétalos 🌼</div>
+    <div class="strip">Consejo: toca o haz clic para invocar más pétalos 🌼</div>
   </main>
 
   <footer>
@@ -227,10 +342,10 @@
     }
 
     // Initial burst
-    for (let i = 0; i < 24; i++) setTimeout(() => spawnPetal(), i * 220);
+    for (let i = 0; i < 28; i++) setTimeout(() => spawnPetal(), i * 200);
 
     // Continuous spawn
-    setInterval(() => spawnPetal(), 1000);
+    setInterval(() => spawnPetal(), 900);
 
     // Tap/click to spawn
     window.addEventListener('pointerdown', (e) => spawnPetal(e.clientX));
